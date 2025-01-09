@@ -8,6 +8,7 @@
 #############################
 
 alert=90
+backup_date=$(date +'%m%d%Y %H:%M:%S')
 df -H | awk '{print $5 " " $1}' | while read output;
 
 do
@@ -23,6 +24,9 @@ fs=$(echo $output | awk '{print $2}')
 
 if [ $usage -gt $alert ]
 then
-echo "CRITICAL for $fs : $usage"
+echo "CRITICAL for $fs : $usage on $backup_date"
 fi
 done
+
+#cron job for running the script every 20 minutes 24/7
+# */20 * * * * bash /home/ubuntu/check_disk.sh > /home/ubuntu/logs.txt
