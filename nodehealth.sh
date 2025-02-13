@@ -7,16 +7,16 @@
 
 #############################
 
-set -x #debug mode
+set -x # Debug mode
 
-echo "Disk Space"
+echo "===== Disk Space ====="
 df -h
 
-echo "Memory"
+echo "===== Memory ====="
 free -g
 
-echo "CPU"
+echo "===== CPU ====="
 nproc
 
-echo "Proccess IDs"
-awk
+echo "===== Running Processes ====="
+ps aux --sort=-%mem | head -10  # Show top 10 processes by memory usage
