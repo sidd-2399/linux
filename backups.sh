@@ -7,18 +7,20 @@
 
 #################################
 
+#!/bin/bash
+
 set -e
 set -o pipefail
 
-src_dir=/home/code/prac
-trgt_dir=/home/code/backups
+src_dir="/home/code/prac"
+trgt_dir="/home/code/backups"
 
 curr_timestamp=$(date "+%Y-%m-%d-%H-%M-%S")
+backup_file="$trgt_dir/$curr_timestamp.tgz"
 
-backup_file=$trgt_dir/$curr_timestamp.tgz
+mkdir -p "$trgt_dir"
 
 echo "Taking backup on $curr_timestamp"
+tar czf "$backup_file" "$src_dir"
 
-tar czf $backup_file $src_dir
-
-echo "${backup_file} backup complete!" 
+echo "$backup_file backup complete!"
