@@ -9,14 +9,15 @@
 #set -x
 set -e
 set -o pipefail
-add_user()
-{
+add_user() {
     USER=$1
     PASS=$2
 
-    useradd -m -p $PASS $USER
-    echo "Succesfully added user"
+    ENCRYPTED_PASS=$(openssl passwd -6 "$PASS")
+    useradd -m -p "$ENCRYPTED_PASS" "$USER"
+    echo "Successfully added user: $USER"
 }
+
 
 #MAIN
 
